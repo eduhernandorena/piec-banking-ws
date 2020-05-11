@@ -22,34 +22,8 @@ public class BankSlipService {
     private static final String URL_REGISTRAR_BOLETO = "https://cobranca.homologa.bb.com.br:7101/registrarBoleto";
     private static final String PARAM_URL = "grant_type=client_credentials&scope=cobranca.registro-boletos";
 
-    public static Resposta registerBillet(String clientID, String clientSecret) throws IOException, JAXBException, UnirestException {
+    public static Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) throws IOException, JAXBException, UnirestException {
         String token = getToken(clientID, clientSecret);
-
-        Requisicao requisicao = new Requisicao();
-        requisicao.setNumeroConvenio(3248778);
-        requisicao.setNumeroCarteira((short) 17);
-        requisicao.setNumeroVariacaoCarteira((short) 434);
-        requisicao.setCodigoModalidadeTitulo((short) 1);
-        requisicao.setDataEmissaoTitulo("01.03.2020");
-        requisicao.setDataVencimentoTitulo("21.11.2020");
-        requisicao.setValorOriginalTitulo(new BigDecimal(30000));
-        requisicao.setCodigoTipoMulta((short) 0);
-        requisicao.setCodigoAceiteTitulo("N");
-        requisicao.setCodigoTipoTitulo((short) 2);
-        requisicao.setIndicadorPermissaoRecebimentoParcial("N");
-        requisicao.setTextoNumeroTituloCliente(Util.fillText("3248778") + "0000000002");
-        requisicao.setCodigoTipoInscricaoPagador((short) 2);
-        requisicao.setNumeroInscricaoPagador(73400584000166L);
-        requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
-        requisicao.setTextoEnderecoPagador("RUA SEM NOME");
-        requisicao.setNumeroCepPagador(12345678);
-        requisicao.setNomeMunicipioPagador("BRASILIA");
-        requisicao.setNomeBairroPagador("SIA");
-        requisicao.setSiglaUfPagador("DF");
-        requisicao.setTextoNumeroTelefonePagador("45619988");
-        requisicao.setCodigoChaveUsuario("1");
-        requisicao.setCodigoTipoCanalSolicitacao((short) 5);
-
 
         Unirest.setTimeouts(0, 0);
         HttpResponse<String> response = Unirest.post(URL_REGISTRAR_BOLETO)

@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class PaymentBilletFill {
+public class PaymentBilletService {
 
     private static final String URL_TOKEN = "https://oauth.hm.bb.com.br/oauth/token";
     private static final String URL_REGISTRAR_BOLETO = "https://cobranca.homologa.bb.com.br:7101/registrarBoleto";

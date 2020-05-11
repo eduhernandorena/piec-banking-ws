@@ -11,7 +11,6 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;

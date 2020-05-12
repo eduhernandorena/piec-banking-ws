@@ -84,6 +84,10 @@ public class BankSlipController {
     private static String fillText(String value) {
         String zeroes = "0000000000";
 
+        if(value.length() >= 10){
+            return value.substring(0, 10);
+        }
+
         return zeroes.substring(0, (10 - value.length())) + value;
     }
 }

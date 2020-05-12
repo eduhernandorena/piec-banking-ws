@@ -17,9 +17,23 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 public class BankSlipService extends WebServiceGatewaySupport {
+    private static final String URL_TOKEN_HOM = "https://oauth.hm.bb.com.br/oauth/token";
+    private static final String URL_REGISTRAR_BOLETO_HOM = "https://cobranca.homologa.bb.com.br:7101/registrarBoleto";
+    private static final String URL_TOKEN_PROD = "https://oauth.bb.com.br/oauth/token";
+    private static final String URL_REGISTRAR_BOLETO_PROD = "https://cobranca.bb.com.br:7101/registrarBoleto";
 
-    private static final String URL_TOKEN = "https://oauth.hm.bb.com.br/oauth/token";
-    private static final String URL_REGISTRAR_BOLETO = "https://cobranca.homologa.bb.com.br:7101/registrarBoleto";
+    private String urlToken = URL_TOKEN_HOM;
+    private String urlRegistrarBoleto = URL_REGISTRAR_BOLETO_HOM;
+
+    public BankSlipService(int env) {
+        if (env == 1) {
+            urlToken = URL_TOKEN_PROD;
+            urlRegistrarBoleto = URL_REGISTRAR_BOLETO_PROD;
+        } else if (env == 0) {
+            urlToken = URL_TOKEN_HOM;
+            urlRegistrarBoleto = URL_REGISTRAR_BOLETO_HOM;
+        }
+    }
 
 
     public Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) {
@@ -29,7 +43,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
         getWebServiceTemplate().setMarshaller(marshaller);
         getWebServiceTemplate().setUnmarshaller(marshaller);
 
-        return (Resposta) getWebServiceTemplate().marshalSendAndReceive(URL_REGISTRAR_BOLETO, requisicao, message -> {
+        return (Resposta) getWebServiceTemplate().marshalSendAndReceive(urlRegistrarBoleto, requisicao, message -> {
             try {
                 if (message instanceof SaajSoapMessage) {
                     SaajSoapMessage soapMessage = (SaajSoapMessage) message;
@@ -44,7 +58,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
         });
     }
 
-    private static String getToken(String clientID, String clientSecret) {
+    private String getToken(String clientID, String clientSecret) {
         String auth = clientID + ":" + clientSecret;
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
         String authHeaderValue = "Basic " + new String(encodedAuth);
@@ -62,7 +76,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
         RestTemplate rest = new RestTemplate();
         ResponseEntity<String> response =
-                rest.exchange(URL_TOKEN,
+                rest.exchange(urlToken,
                         HttpMethod.POST,
                         entity,
                         String.class);

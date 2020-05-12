@@ -12,12 +12,3 @@ spring:
         piec-getbankslip:
           destination: piec-getbankslip
           contentType: application/json
-
-server:
-  ssl:
-    key-store: classpath:keystore.jks
-    key-store-password: changeit
-    key-alias: javaclient
-    trust-store: classpath:truststore.jks
-    trust-store-password: changeit
-    client-auth: need

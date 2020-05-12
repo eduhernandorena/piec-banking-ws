@@ -1,16 +1,25 @@
 package br.org.fiergs.piecbankingws.main.services;
 
-import br.org.fiergs.cobranca.bb.entities.Requisicao;
-import br.org.fiergs.cobranca.bb.entities.Resposta;
+import br.org.fiergs.piecbankingws.main.entities.Requisicao;
+import br.org.fiergs.piecbankingws.main.entities.Resposta;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
+import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
+import javax.net.ssl.SSLContext;
 import javax.xml.soap.MimeHeaders;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -24,9 +33,6 @@ public class BankSlipService extends WebServiceGatewaySupport {
 
     private String urlToken = URL_TOKEN_HOM;
     private String urlRegistrarBoleto = URL_REGISTRAR_BOLETO_HOM;
-
-    public BankSlipService() {
-    }
 
     public BankSlipService(int env) {
         if (env == 1) {
@@ -42,7 +48,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
     public Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) {
         String token = getToken(clientID, clientSecret);
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("br.org.fiergs.cobranca.bb.entities");
+        marshaller.setContextPath("br.org.fiergs.piecbankingws.main.entities");
         getWebServiceTemplate().setMarshaller(marshaller);
         getWebServiceTemplate().setUnmarshaller(marshaller);
 
@@ -86,6 +92,31 @@ public class BankSlipService extends WebServiceGatewaySupport {
 
         String resp = response.getBody();
         return Objects.requireNonNull(resp).substring(17, resp.indexOf("\",\"token_type"));
+    }
+
+    @Bean
+    public HttpComponentsMessageSender httpComponentsMessageSender() throws Exception {
+        HttpComponentsMessageSender httpComponentsMessageSender = new HttpComponentsMessageSender();
+        httpComponentsMessageSender.setHttpClient(httpClient());
+
+        return httpComponentsMessageSender;
+    }
+
+    public HttpClient httpClient() throws Exception {
+        return HttpClientBuilder.create().setSSLSocketFactory(sslConnectionSocketFactory())
+                .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor()).build();
+    }
+
+    public SSLConnectionSocketFactory sslConnectionSocketFactory() throws Exception {
+        // NoopHostnameVerifier essentially turns hostname verification off as otherwise following error
+        // is thrown: java.security.cert.CertificateException: No name matching localhost found
+        return new SSLConnectionSocketFactory(sslContext(), NoopHostnameVerifier.INSTANCE);
+    }
+
+    public SSLContext sslContext() throws Exception {
+        return SSLContextBuilder.create()
+                .loadTrustMaterial(ResourceUtils.getFile(
+                        "file:ca/jssecacerts"), "changeit".toCharArray()).build();
     }
 }
 

@@ -1,7 +1,7 @@
 package br.org.fiergs.piecbankingws.main.controllers;
 
-import br.org.fiergs.cobranca.bb.entities.Requisicao;
-import br.org.fiergs.cobranca.bb.entities.Resposta;
+import br.org.fiergs.piecbankingws.main.entities.Requisicao;
+import br.org.fiergs.piecbankingws.main.entities.Resposta;
 import br.org.fiergs.piecbankingws.main.services.BankSlipService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

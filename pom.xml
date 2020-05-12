@@ -195,6 +195,9 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <args>
+                                <vmArg>-Djavax.net.ssl.trustStore=src/main/resources/ca/jssecacerts</vmArg>
+                            </args>
                             <schemaLanguage>WSDL</schemaLanguage>
                             <generatePackage>br.org.fiergs.cobranca.bb.entities</generatePackage>
                             <schemas>

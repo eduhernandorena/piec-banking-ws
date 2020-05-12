@@ -25,6 +25,9 @@ public class BankSlipService extends WebServiceGatewaySupport {
     private String urlToken = URL_TOKEN_HOM;
     private String urlRegistrarBoleto = URL_REGISTRAR_BOLETO_HOM;
 
+    public BankSlipService() {
+    }
+
     public BankSlipService(int env) {
         if (env == 1) {
             urlToken = URL_TOKEN_PROD;

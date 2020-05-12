@@ -63,7 +63,7 @@ public class BankSlipController {
         requisicao.setNomeBairroPagador("SIA");
         requisicao.setSiglaUfPagador("DF");
         requisicao.setTextoNumeroTelefonePagador("45619988");
-        requisicao.setCodigoChaveUsuario("1");
+        requisicao.setCodigoChaveUsuario("J1234567");
         requisicao.setCodigoTipoCanalSolicitacao((short) 5);
 
         Resposta resp = new BankSlipService(0).registerBillet(clientID, clientSecret, requisicao);

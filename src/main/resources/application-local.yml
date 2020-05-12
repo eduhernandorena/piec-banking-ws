@@ -3,8 +3,6 @@ spring:
     stream:
       kafka:
         binder:
-          #brokers: localhost:9092
-          #          brokers: 10.100.250.161:9092,10.100.250.163:9092,10.100.250.81:9092
           brokers: kafka-broker-01-dev.sistemafiergs.com.br,kafka-broker-02-dev.sistemafiergs.com.br,kafka-broker-03-dev.sistemafiergs.com.br
         bindings:
           test-input:

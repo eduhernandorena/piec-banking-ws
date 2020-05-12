@@ -1,17 +1,28 @@
-package br.org.fiergs.piecbankingws.main;
+package br.org.fiergs.piecbankingws.main.controllers;
 
 import br.org.fiergs.cobranca.bb.entities.Requisicao;
 import br.org.fiergs.cobranca.bb.entities.Resposta;
 import br.org.fiergs.piecbankingws.main.services.BankSlipService;
-import br.org.fiergs.piecbankingws.main.utils.Util;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.math.BigDecimal;
 
-public class Main {
-    public static void main(String[] args) throws JAXBException, IOException, UnirestException {
+@RestController
+@RequestMapping(value = "/bankslip", produces = MediaType.APPLICATION_JSON_VALUE)
+public class BankSlipController {
+
+    @PostMapping(value = {"/register-billet", "/register-billet/"}, consumes = MediaType.APPLICATION_XML_VALUE)
+    public Resposta registerBillet(@RequestBody Requisicao requisicao,
+                                   @RequestHeader("clientId") String clientId,
+                                   @RequestHeader("clientSecret") String clientSecret) {
+
+        BankSlipService service = new BankSlipService();
+        return service.registerBillet(clientId, clientSecret, requisicao);
+    }
+
+    @GetMapping(value = "/")
+    public Resposta registerBilletHom(){
         String clientID = "eyJpZCI6IjgwNDNiNTMtZjQ5Mi00YyIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxfQ";
         String clientSecret = "eyJpZCI6IjBjZDFlMGQtN2UyNC00MGQyLWI0YSIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxLCJzZXF1ZW5jaWFsQ3JlZGVuY2lhbCI6MX0";
 
@@ -27,7 +38,7 @@ public class Main {
         requisicao.setCodigoAceiteTitulo("N");
         requisicao.setCodigoTipoTitulo((short) 2);
         requisicao.setIndicadorPermissaoRecebimentoParcial("N");
-        requisicao.setTextoNumeroTituloCliente(Util.fillText("3248778") + "0000000002");
+        requisicao.setTextoNumeroTituloCliente(fillText() + "0000000002");
         requisicao.setCodigoTipoInscricaoPagador((short) 2);
         requisicao.setNumeroInscricaoPagador(73400584000166L);
         requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
@@ -40,7 +51,7 @@ public class Main {
         requisicao.setCodigoChaveUsuario("1");
         requisicao.setCodigoTipoCanalSolicitacao((short) 5);
 
-        Resposta resp = BankSlipService.registerBillet(clientID, clientSecret, requisicao);
+        Resposta resp = new BankSlipService().registerBillet(clientID, clientSecret, requisicao);
 
         if (resp.getCodigoBarraNumerico().isBlank()) {
             System.out.println("CÓD ERRO: " + resp.getCodigoRetornoPrograma());
@@ -49,5 +60,13 @@ public class Main {
             System.out.println("CÓD BARRA: " + resp.getCodigoBarraNumerico());
             System.out.println("LINHA DIG: " + resp.getLinhaDigitavel());
         }
+
+        return resp;
+    }
+
+    private static String fillText() {
+        String zeroes = "0000000000";
+
+        return zeroes.substring(0, (10 - "3248778".length())) + "3248778";
     }
 }

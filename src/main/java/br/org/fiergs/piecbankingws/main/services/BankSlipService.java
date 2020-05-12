@@ -1,5 +1,6 @@
 package br.org.fiergs.piecbankingws.main.services;
 
+import br.org.fiergs.piecbankingws.main.config.SSLUtil;
 import br.org.fiergs.piecbankingws.main.entities.Requisicao;
 import br.org.fiergs.piecbankingws.main.entities.Resposta;
 import org.apache.commons.codec.binary.Base64;
@@ -22,6 +23,8 @@ import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 import javax.net.ssl.SSLContext;
 import javax.xml.soap.MimeHeaders;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -45,7 +48,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
     }
 
 
-    public Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) {
+    public Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) throws NoSuchAlgorithmException, KeyManagementException {
         String token = getToken(clientID, clientSecret);
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("br.org.fiergs.piecbankingws.main.entities");
@@ -67,7 +70,8 @@ public class BankSlipService extends WebServiceGatewaySupport {
         });
     }
 
-    private String getToken(String clientID, String clientSecret) {
+    private String getToken(String clientID, String clientSecret) throws KeyManagementException, NoSuchAlgorithmException {
+        SSLUtil.turnOffSslChecking();
         String auth = clientID + ":" + clientSecret;
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
         String authHeaderValue = "Basic " + new String(encodedAuth);

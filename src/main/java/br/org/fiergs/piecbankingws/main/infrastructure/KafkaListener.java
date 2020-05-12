@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
 @Component
 public class KafkaListener {
 
@@ -15,7 +18,7 @@ public class KafkaListener {
      */
 
     @StreamListener(KafkaChannels.GETBANKSLIP_INPUT)
-    public void getRegisterBilletHomolog() {
+    public void getRegisterBilletHomolog() throws NoSuchAlgorithmException, KeyManagementException {
         bankSlipController.registerBilletHom();
     }
 }

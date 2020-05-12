@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 @RestController
@@ -25,7 +27,7 @@ public class BankSlipController {
     public Resposta registerBillet(@RequestBody Requisicao requisicao,
                                    @RequestHeader("environment") int environment,
                                    @RequestHeader("clientId") String clientId,
-                                   @RequestHeader("clientSecret") String clientSecret) {
+                                   @RequestHeader("clientSecret") String clientSecret) throws KeyManagementException, NoSuchAlgorithmException {
 
         BankSlipService service = new BankSlipService(environment);
         return service.registerBillet(clientId, clientSecret, requisicao);
@@ -37,7 +39,7 @@ public class BankSlipController {
      * @return um retorno do ambiente de homologação de acordo com as informações fixadas
      */
     @GetMapping(value = "/")
-    public Resposta registerBilletHom() {
+    public Resposta registerBilletHom() throws KeyManagementException, NoSuchAlgorithmException {
         String clientID = "eyJpZCI6IjgwNDNiNTMtZjQ5Mi00YyIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxfQ";
         String clientSecret = "eyJpZCI6IjBjZDFlMGQtN2UyNC00MGQyLWI0YSIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxLCJzZXF1ZW5jaWFsQ3JlZGVuY2lhbCI6MX0";
 

@@ -3,6 +3,7 @@ package br.org.fiergs.piecbankingws.main.services;
 import br.org.fiergs.piecbankingws.main.config.SSLUtil;
 import br.org.fiergs.piecbankingws.main.entities.Requisicao;
 import br.org.fiergs.piecbankingws.main.entities.Resposta;
+import br.org.fiergs.piecbankingws.main.infrastructure.KafkaChannels;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -36,6 +37,8 @@ public class BankSlipService extends WebServiceGatewaySupport {
 
     private String urlToken = URL_TOKEN_HOM;
     private String urlRegistrarBoleto = URL_REGISTRAR_BOLETO_HOM;
+
+    private KafkaChannels channels;
 
     public BankSlipService(int env) {
         if (env == 1) {

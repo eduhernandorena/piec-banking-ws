@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
@@ -32,7 +31,7 @@ public class BankSlipController {
      * @param clientSecret secret key do cliente
      * @return uma resposta contendo os dados do boleto registrado ou o erro que foi gerado
      */
-    @PostMapping(value = {"/register-billet", "/register-billet/"}, consumes = MediaType.APPLICATION_XML_VALUE)
+    @PostMapping(value = {"/register-billet", "/register-billet/"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Resposta registerBillet(@RequestBody Requisicao requisicao,
                                    @RequestHeader("environment") int environment,
                                    @RequestHeader("clientId") String clientId,
@@ -51,15 +50,14 @@ public class BankSlipController {
     public Resposta registerBilletHom() throws KeyManagementException, NoSuchAlgorithmException {
         String clientID = "eyJpZCI6IjgwNDNiNTMtZjQ5Mi00YyIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxfQ";
         String clientSecret = "eyJpZCI6IjBjZDFlMGQtN2UyNC00MGQyLWI0YSIsImNvZGlnb1B1YmxpY2Fkb3IiOjEwOSwiY29kaWdvU29mdHdhcmUiOjEsInNlcXVlbmNpYWxJbnN0YWxhY2FvIjoxLCJzZXF1ZW5jaWFsQ3JlZGVuY2lhbCI6MX0";
-
         Requisicao requisicao = new Requisicao();
         requisicao.setNumeroConvenio(3248778);
         requisicao.setNumeroCarteira((short) 17);
         requisicao.setNumeroVariacaoCarteira((short) 434);
         requisicao.setCodigoModalidadeTitulo((short) 1);
-        requisicao.setDataEmissaoTitulo("01.03.2020");
+        //requisicao.setDataEmissaoTitulo("01.03.2020");
         requisicao.setDataVencimentoTitulo("21.11.2020");
-        requisicao.setValorOriginalTitulo(new BigDecimal(30000));
+        //requisicao.setValorOriginalTitulo(new BigDecimal(30000));
         requisicao.setCodigoTipoMulta((short) 0);
         requisicao.setCodigoAceiteTitulo("N");
         requisicao.setCodigoTipoTitulo((short) 2);
@@ -67,13 +65,13 @@ public class BankSlipController {
         requisicao.setTextoNumeroTituloCliente(fillText("3248778") + fillText(String.valueOf(new Random().nextInt())));
         requisicao.setCodigoTipoInscricaoPagador((short) 2);
         requisicao.setNumeroInscricaoPagador(73400584000166L);
-        requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
-        requisicao.setTextoEnderecoPagador("RUA SEM NOME");
-        requisicao.setNumeroCepPagador(12345678);
-        requisicao.setNomeMunicipioPagador("BRASILIA");
-        requisicao.setNomeBairroPagador("SIA");
-        requisicao.setSiglaUfPagador("DF");
-        requisicao.setTextoNumeroTelefonePagador("45619988");
+        //requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
+        //requisicao.setTextoEnderecoPagador("RUA SEM NOME");
+        //requisicao.setNumeroCepPagador(12345678);
+        //requisicao.setNomeMunicipioPagador("BRASILIA");
+        //requisicao.setNomeBairroPagador("SIA");
+       // requisicao.setSiglaUfPagador("DF");
+        //requisicao.setTextoNumeroTelefonePagador("45619988");
         requisicao.setCodigoChaveUsuario("J1234567");
         requisicao.setCodigoTipoCanalSolicitacao((short) 5);
 

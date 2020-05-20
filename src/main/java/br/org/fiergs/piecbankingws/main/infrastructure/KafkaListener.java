@@ -17,8 +17,8 @@ public class KafkaListener {
     CLASSE ENCARREGADA DE ENVIAR A REQUISIÇÃO PARA O SERVIÇO BANKSLIPSERVICE
      */
 
-    @StreamListener(KafkaChannels.GETBANKSLIP_INPUT)
-    public void getRegisterBilletHomolog() throws NoSuchAlgorithmException, KeyManagementException {
-        bankSlipController.registerBilletHom();
-    }
+   // @StreamListener(KafkaChannels.GETBANKSLIP_INPUT)
+   // public void getRegisterBilletHomolog() throws NoSuchAlgorithmException, KeyManagementException {
+   //     bankSlipController.registerBilletHom();
+    //}
 }

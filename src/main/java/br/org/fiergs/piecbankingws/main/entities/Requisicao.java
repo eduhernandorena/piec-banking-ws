@@ -1485,4 +1485,52 @@ public class Requisicao {
         this.codigoTipoCanalSolicitacao = value;
     }
 
+    @Override
+    public String toString() {
+        return "Requisicao{" +
+                "numeroConvenio=" + numeroConvenio +
+                ", numeroCarteira=" + numeroCarteira +
+                ", numeroVariacaoCarteira=" + numeroVariacaoCarteira +
+                ", codigoModalidadeTitulo=" + codigoModalidadeTitulo +
+                ", dataEmissaoTitulo='" + dataEmissaoTitulo + '\'' +
+                ", dataVencimentoTitulo='" + dataVencimentoTitulo + '\'' +
+                ", valorOriginalTitulo=" + valorOriginalTitulo +
+                ", codigoTipoDesconto=" + codigoTipoDesconto +
+                ", dataDescontoTitulo='" + dataDescontoTitulo + '\'' +
+                ", percentualDescontoTitulo=" + percentualDescontoTitulo +
+                ", valorDescontoTitulo=" + valorDescontoTitulo +
+                ", valorAbatimentoTitulo=" + valorAbatimentoTitulo +
+                ", quantidadeDiaProtesto=" + quantidadeDiaProtesto +
+                ", codigoTipoJuroMora=" + codigoTipoJuroMora +
+                ", percentualJuroMoraTitulo=" + percentualJuroMoraTitulo +
+                ", valorJuroMoraTitulo=" + valorJuroMoraTitulo +
+                ", codigoTipoMulta=" + codigoTipoMulta +
+                ", dataMultaTitulo='" + dataMultaTitulo + '\'' +
+                ", percentualMultaTitulo=" + percentualMultaTitulo +
+                ", valorMultaTitulo=" + valorMultaTitulo +
+                ", codigoAceiteTitulo='" + codigoAceiteTitulo + '\'' +
+                ", codigoTipoTitulo=" + codigoTipoTitulo +
+                ", textoDescricaoTipoTitulo='" + textoDescricaoTipoTitulo + '\'' +
+                ", indicadorPermissaoRecebimentoParcial='" + indicadorPermissaoRecebimentoParcial + '\'' +
+                ", textoNumeroTituloBeneficiario='" + textoNumeroTituloBeneficiario + '\'' +
+                ", textoCampoUtilizacaoBeneficiario='" + textoCampoUtilizacaoBeneficiario + '\'' +
+                ", codigoTipoContaCaucao=" + codigoTipoContaCaucao +
+                ", textoNumeroTituloCliente='" + textoNumeroTituloCliente + '\'' +
+                ", textoMensagemBloquetoOcorrencia='" + textoMensagemBloquetoOcorrencia + '\'' +
+                ", codigoTipoInscricaoPagador=" + codigoTipoInscricaoPagador +
+                ", numeroInscricaoPagador=" + numeroInscricaoPagador +
+                ", nomePagador='" + nomePagador + '\'' +
+                ", textoEnderecoPagador='" + textoEnderecoPagador + '\'' +
+                ", numeroCepPagador=" + numeroCepPagador +
+                ", nomeMunicipioPagador='" + nomeMunicipioPagador + '\'' +
+                ", nomeBairroPagador='" + nomeBairroPagador + '\'' +
+                ", siglaUfPagador='" + siglaUfPagador + '\'' +
+                ", textoNumeroTelefonePagador='" + textoNumeroTelefonePagador + '\'' +
+                ", codigoTipoInscricaoAvalista=" + codigoTipoInscricaoAvalista +
+                ", numeroInscricaoAvalista=" + numeroInscricaoAvalista +
+                ", nomeAvalistaTitulo='" + nomeAvalistaTitulo + '\'' +
+                ", codigoChaveUsuario='" + codigoChaveUsuario + '\'' +
+                ", codigoTipoCanalSolicitacao=" + codigoTipoCanalSolicitacao +
+                '}';
+    }
 }

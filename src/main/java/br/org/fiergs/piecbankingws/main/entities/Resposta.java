@@ -792,4 +792,32 @@ public class Resposta {
         this.numeroContratoCobranca = value;
     }
 
+    @Override
+    public String toString() {
+        return "Resposta{" +
+                "siglaSistemaMensagem='" + siglaSistemaMensagem + '\'' +
+                ", codigoRetornoPrograma=" + codigoRetornoPrograma +
+                ", nomeProgramaErro='" + nomeProgramaErro + '\'' +
+                ", textoMensagemErro='" + textoMensagemErro + '\'' +
+                ", numeroPosicaoErroPrograma=" + numeroPosicaoErroPrograma +
+                ", codigoTipoRetornoPrograma=" + codigoTipoRetornoPrograma +
+                ", textoNumeroTituloCobrancaBb='" + textoNumeroTituloCobrancaBb + '\'' +
+                ", numeroCarteiraCobranca=" + numeroCarteiraCobranca +
+                ", numeroVariacaoCarteiraCobranca=" + numeroVariacaoCarteiraCobranca +
+                ", codigoPrefixoDependenciaBeneficiario=" + codigoPrefixoDependenciaBeneficiario +
+                ", numeroContaCorrenteBeneficiario=" + numeroContaCorrenteBeneficiario +
+                ", codigoCliente=" + codigoCliente +
+                ", linhaDigitavel='" + linhaDigitavel + '\'' +
+                ", codigoBarraNumerico='" + codigoBarraNumerico + '\'' +
+                ", codigoTipoEnderecoBeneficiario=" + codigoTipoEnderecoBeneficiario +
+                ", nomeLogradouroBeneficiario='" + nomeLogradouroBeneficiario + '\'' +
+                ", nomeBairroBeneficiario='" + nomeBairroBeneficiario + '\'' +
+                ", nomeMunicipioBeneficiario='" + nomeMunicipioBeneficiario + '\'' +
+                ", codigoMunicipioBeneficiario=" + codigoMunicipioBeneficiario +
+                ", siglaUfBeneficiario='" + siglaUfBeneficiario + '\'' +
+                ", codigoCepBeneficiario=" + codigoCepBeneficiario +
+                ", indicadorComprovacaoBeneficiario='" + indicadorComprovacaoBeneficiario + '\'' +
+                ", numeroContratoCobranca=" + numeroContratoCobranca +
+                '}';
+    }
 }

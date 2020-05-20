@@ -23,10 +23,12 @@ import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
 import javax.net.ssl.SSLContext;
 import javax.xml.soap.MimeHeaders;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class BankSlipService extends WebServiceGatewaySupport {
@@ -57,6 +59,30 @@ public class BankSlipService extends WebServiceGatewaySupport {
         marshaller.setContextPath("br.org.fiergs.piecbankingws.main.entities");
         getWebServiceTemplate().setMarshaller(marshaller);
         getWebServiceTemplate().setUnmarshaller(marshaller);
+        //requisicao.setNumeroConvenio(3248778);
+        //requisicao.setNumeroCarteira((short) 17);
+        //requisicao.setNumeroVariacaoCarteira((short) 434);
+        //requisicao.setCodigoModalidadeTitulo((short) 1);
+        //requisicao.setDataEmissaoTitulo("01.03.2020");
+        //requisicao.setDataVencimentoTitulo("21.11.2020");
+        /*requisicao.setValorOriginalTitulo(new BigDecimal(30000));
+        requisicao.setCodigoTipoMulta((short) 0);
+        requisicao.setCodigoAceiteTitulo("N");
+        requisicao.setCodigoTipoTitulo((short) 2);
+        requisicao.setIndicadorPermissaoRecebimentoParcial("N");*/
+        requisicao.setTextoNumeroTituloCliente(fillText(requisicao.getNumeroConvenio().toString()) + fillText(String.valueOf(new Random().nextInt())));
+        //requisicao.setCodigoTipoInscricaoPagador((short) 2);
+        //requisicao.setNumeroInscricaoPagador(37133038000142L);
+        //requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
+        //requisicao.setTextoEnderecoPagador("RUA SEM NOME");
+        //requisicao.setNumeroCepPagador(12345678);
+        //requisicao.setNomeMunicipioPagador("BRASILIA");
+        //requisicao.setNomeBairroPagador("SIA");
+        //requisicao.setSiglaUfPagador("DF");
+        //requisicao.setTextoNumeroTelefonePagador("991172668");
+        //requisicao.setCodigoChaveUsuario("J1234567");
+        //requisicao.setCodigoTipoCanalSolicitacao((short) 5);*/
+        System.out.println(requisicao.toString());
 
         return (Resposta) getWebServiceTemplate().marshalSendAndReceive(urlRegistrarBoleto, requisicao, message -> {
             try {
@@ -124,6 +150,16 @@ public class BankSlipService extends WebServiceGatewaySupport {
         return SSLContextBuilder.create()
                 .loadTrustMaterial(ResourceUtils.getFile(
                         "file:ca/jssecacerts"), "changeit".toCharArray()).build();
+    }
+
+    private static String fillText(String value) {
+        String zeroes = "0000000000";
+
+        if(value.length() >= 10){
+            return value.substring(0, 10);
+        }
+
+        return zeroes.substring(0, (10 - value.length())) + value;
     }
 }
 

@@ -2,10 +2,8 @@ package br.org.fiergs.piecbankingws.main.controllers;
 
 import br.org.fiergs.piecbankingws.main.entities.Requisicao;
 import br.org.fiergs.piecbankingws.main.entities.Resposta;
-import br.org.fiergs.piecbankingws.main.infrastructure.KafkaChannels;
 import br.org.fiergs.piecbankingws.main.services.BankSlipService;
 import org.springframework.http.MediaType;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.KeyManagementException;
@@ -15,12 +13,6 @@ import java.util.Random;
 @RestController
 @RequestMapping(value = "/bankslip", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BankSlipController {
-
-    private KafkaChannels channels;
-
-    public BankSlipController(KafkaChannels channels) {
-        this.channels = channels;
-    }
 
     /**
      * Método que registra um boleto no banco do brasil
@@ -84,11 +76,6 @@ public class BankSlipController {
             System.out.println("CÓD BARRA: " + resp.getCodigoBarraNumerico());
             System.out.println("LINHA DIG: " + resp.getLinhaDigitavel());
         }
-
-        this.channels.sendBankslipOutput().send(
-                MessageBuilder
-                        .withPayload(resp)
-                        .build());
 
         return resp;
     }

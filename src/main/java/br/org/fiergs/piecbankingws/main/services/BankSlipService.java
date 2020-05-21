@@ -94,28 +94,28 @@ public class BankSlipService extends WebServiceGatewaySupport {
         return Objects.requireNonNull(resp).substring(17, resp.indexOf("\",\"token_type"));
     }
 
-//    @Bean
-//    public HttpComponentsMessageSender httpComponentsMessageSender() throws Exception {
-//        HttpComponentsMessageSender httpComponentsMessageSender = new HttpComponentsMessageSender();
-//        httpComponentsMessageSender.setHttpClient(httpClient());
-//
-//        return httpComponentsMessageSender;
-//    }
-//
-//    public HttpClient httpClient() throws Exception {
-//        return HttpClientBuilder.create().setSSLSocketFactory(sslConnectionSocketFactory())
-//                .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor()).build();
-//    }
-//
-//    public SSLConnectionSocketFactory sslConnectionSocketFactory() throws Exception {
-//        return new SSLConnectionSocketFactory(sslContext(), NoopHostnameVerifier.INSTANCE);
-//    }
-//
-//    public SSLContext sslContext() throws Exception {
-//        return SSLContextBuilder.create()
-//                .loadTrustMaterial(ResourceUtils.getFile(
-//                        "file:ca/jssecacerts"), "changeit".toCharArray()).build();
-//    }
+    @Bean
+    public HttpComponentsMessageSender httpComponentsMessageSender() throws Exception {
+        HttpComponentsMessageSender httpComponentsMessageSender = new HttpComponentsMessageSender();
+        httpComponentsMessageSender.setHttpClient(httpClient());
+
+        return httpComponentsMessageSender;
+    }
+
+    public HttpClient httpClient() throws Exception {
+        return HttpClientBuilder.create().setSSLSocketFactory(sslConnectionSocketFactory())
+                .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor()).build();
+    }
+
+    public SSLConnectionSocketFactory sslConnectionSocketFactory() throws Exception {
+        return new SSLConnectionSocketFactory(sslContext(), NoopHostnameVerifier.INSTANCE);
+    }
+
+    public SSLContext sslContext() throws Exception {
+        return SSLContextBuilder.create()
+                .loadTrustMaterial(ResourceUtils.getFile(
+                        "file:ca/jssecacerts"), "changeit".toCharArray()).build();
+    }
 }
 
 

@@ -29,11 +29,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
@@ -121,37 +116,11 @@
             <artifactId>ccor-data-rest</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
-<!--        <profiles>-->
-<!--        <profile>-->
-<!--            <id>jaxb-java</id>-->
-<!--            <build>-->
-<!--                <plugins>-->
-<!--                    <plugin>-->
-<!--                        <groupId>org.jvnet.jaxb2.maven2</groupId>-->
-<!--                        <artifactId>maven-jaxb2-plugin</artifactId>-->
-<!--                        <version>0.14.0</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <goals>-->
-<!--                                    <goal>generate</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                        <configuration>-->
-<!--                            <schemaLanguage>WSDL</schemaLanguage>-->
-<!--                            <generatePackage>br.org.fiergs.cobranca.bb.entities</generatePackage>-->
-<!--                            <schemas>-->
-<!--                                <schema>-->
-<!--                                    <url>https://cobranca.homologa.bb.com.br:7101/Processos/Ws/RegistroCobrancaService.serviceagent?wsdl</url>-->
-<!--                                </schema>-->
-<!--                            </schemas>-->
-<!--                        </configuration>-->
-<!--                    </plugin>-->
-<!--                </plugins>-->
-<!--            </build>-->
-
-<!--        </profile>-->
-<!--    </profiles>-->
 </project>

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
     "mensagem"
 })
 @XmlRootElement(name = "erro")
-public class Erro {
+public class ErroEntity {
 
     @XmlElement(name = "Mensagem")
     protected String mensagem;

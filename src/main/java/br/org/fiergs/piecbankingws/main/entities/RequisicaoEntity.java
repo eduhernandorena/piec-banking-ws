@@ -390,7 +390,7 @@ import javax.xml.bind.annotation.XmlType;
     "codigoTipoCanalSolicitacao"
 })
 @XmlRootElement(name = "requisicao")
-public class Requisicao {
+public class RequisicaoEntity {
 
     protected Integer numeroConvenio;
     protected Short numeroCarteira;

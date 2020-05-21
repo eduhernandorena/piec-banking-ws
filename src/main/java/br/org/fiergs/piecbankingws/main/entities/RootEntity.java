@@ -38,30 +38,30 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "requisicao",
-    "resposta",
-    "erro"
+        "requisicaoEntity",
+        "respostaEntity",
+        "erroEntity"
 })
 @XmlRootElement(name = "root")
-public class Root {
+public class RootEntity {
 
     @XmlElement(required = true)
-    protected Requisicao requisicao;
+    protected RequisicaoEntity requisicaoEntity;
     @XmlElement(required = true)
-    protected Resposta resposta;
+    protected RespostaEntity respostaEntity;
     @XmlElement(required = true)
-    protected Erro erro;
+    protected ErroEntity erroEntity;
 
     /**
      * Obtém o valor da propriedade requisicao.
      * 
      * @return
      *     possible object is
-     *     {@link Requisicao }
+     *     {@link RequisicaoEntity }
      *     
      */
-    public Requisicao getRequisicao() {
-        return requisicao;
+    public RequisicaoEntity getRequisicaoEntity() {
+        return requisicaoEntity;
     }
 
     /**
@@ -69,11 +69,11 @@ public class Root {
      * 
      * @param value
      *     allowed object is
-     *     {@link Requisicao }
+     *     {@link RequisicaoEntity }
      *     
      */
-    public void setRequisicao(Requisicao value) {
-        this.requisicao = value;
+    public void setRequisicaoEntity(RequisicaoEntity value) {
+        this.requisicaoEntity = value;
     }
 
     /**
@@ -81,11 +81,11 @@ public class Root {
      * 
      * @return
      *     possible object is
-     *     {@link Resposta }
+     *     {@link RespostaEntity }
      *     
      */
-    public Resposta getResposta() {
-        return resposta;
+    public RespostaEntity getRespostaEntity() {
+        return respostaEntity;
     }
 
     /**
@@ -93,11 +93,11 @@ public class Root {
      * 
      * @param value
      *     allowed object is
-     *     {@link Resposta }
+     *     {@link RespostaEntity }
      *     
      */
-    public void setResposta(Resposta value) {
-        this.resposta = value;
+    public void setRespostaEntity(RespostaEntity value) {
+        this.respostaEntity = value;
     }
 
     /**
@@ -105,11 +105,11 @@ public class Root {
      * 
      * @return
      *     possible object is
-     *     {@link Erro }
+     *     {@link ErroEntity }
      *     
      */
-    public Erro getErro() {
-        return erro;
+    public ErroEntity getErroEntity() {
+        return erroEntity;
     }
 
     /**
@@ -117,11 +117,11 @@ public class Root {
      * 
      * @param value
      *     allowed object is
-     *     {@link Erro }
+     *     {@link ErroEntity }
      *     
      */
-    public void setErro(Erro value) {
-        this.erro = value;
+    public void setErroEntity(ErroEntity value) {
+        this.erroEntity = value;
     }
 
 }

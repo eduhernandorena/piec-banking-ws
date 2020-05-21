@@ -37,35 +37,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Erro }
+     * Create an instance of {@link ErroEntity }
      * 
      */
-    public Erro createErro() {
-        return new Erro();
+    public ErroEntity createErro() {
+        return new ErroEntity();
     }
 
     /**
-     * Create an instance of {@link Requisicao }
+     * Create an instance of {@link RequisicaoEntity }
      * 
      */
-    public Requisicao createRequisicao() {
-        return new Requisicao();
+    public RequisicaoEntity createRequisicao() {
+        return new RequisicaoEntity();
     }
 
     /**
-     * Create an instance of {@link Resposta }
+     * Create an instance of {@link RespostaEntity }
      * 
      */
-    public Resposta createResposta() {
-        return new Resposta();
+    public RespostaEntity createResposta() {
+        return new RespostaEntity();
     }
 
     /**
-     * Create an instance of {@link Root }
+     * Create an instance of {@link RootEntity }
      * 
      */
-    public Root createRoot() {
-        return new Root();
+    public RootEntity createRoot() {
+        return new RootEntity();
     }
 
 }

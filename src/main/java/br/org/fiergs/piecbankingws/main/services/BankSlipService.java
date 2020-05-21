@@ -1,8 +1,7 @@
 package br.org.fiergs.piecbankingws.main.services;
 
-import br.org.fiergs.piecbankingws.main.config.SSLUtil;
-import br.org.fiergs.piecbankingws.main.entities.Requisicao;
-import br.org.fiergs.piecbankingws.main.entities.Resposta;
+import br.org.fiergs.piecbankingws.main.entities.RequisicaoEntity;
+import br.org.fiergs.piecbankingws.main.entities.RespostaEntity;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -23,10 +22,7 @@ import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 import javax.net.ssl.SSLContext;
 import javax.xml.soap.MimeHeaders;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-import java.util.Random;
 import java.util.logging.Logger;
 
 public class BankSlipService extends WebServiceGatewaySupport {
@@ -49,38 +45,14 @@ public class BankSlipService extends WebServiceGatewaySupport {
     }
 
 
-    public Resposta registerBillet(String clientID, String clientSecret, Requisicao requisicao) throws NoSuchAlgorithmException, KeyManagementException {
+    public RespostaEntity registerBillet(String clientID, String clientSecret, RequisicaoEntity requisicaoEntity) {
         String token = getToken(clientID, clientSecret);
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("br.org.fiergs.piecbankingws.main.entities");
         getWebServiceTemplate().setMarshaller(marshaller);
         getWebServiceTemplate().setUnmarshaller(marshaller);
-        //requisicao.setNumeroConvenio(3248778);
-        //requisicao.setNumeroCarteira((short) 17);
-        //requisicao.setNumeroVariacaoCarteira((short) 434);
-        //requisicao.setCodigoModalidadeTitulo((short) 1);
-        //requisicao.setDataEmissaoTitulo("01.03.2020");
-        //requisicao.setDataVencimentoTitulo("21.11.2020");
-        /*requisicao.setValorOriginalTitulo(new BigDecimal(30000));
-        requisicao.setCodigoTipoMulta((short) 0);
-        requisicao.setCodigoAceiteTitulo("N");
-        requisicao.setCodigoTipoTitulo((short) 2);
-        requisicao.setIndicadorPermissaoRecebimentoParcial("N");*/
-        requisicao.setTextoNumeroTituloCliente(fillText(requisicao.getNumeroConvenio().toString()) + fillText(String.valueOf(new Random().nextInt())));
-        //requisicao.setCodigoTipoInscricaoPagador((short) 2);
-        //requisicao.setNumeroInscricaoPagador(37133038000142L);
-        //requisicao.setNomePagador("MERCADO ANDREAZA DE MACEDO");
-        //requisicao.setTextoEnderecoPagador("RUA SEM NOME");
-        //requisicao.setNumeroCepPagador(12345678);
-        //requisicao.setNomeMunicipioPagador("BRASILIA");
-        //requisicao.setNomeBairroPagador("SIA");
-        //requisicao.setSiglaUfPagador("DF");
-        //requisicao.setTextoNumeroTelefonePagador("991172668");
-        //requisicao.setCodigoChaveUsuario("J1234567");
-        //requisicao.setCodigoTipoCanalSolicitacao((short) 5);*/
-        System.out.println(requisicao.toString());
 
-        return (Resposta) getWebServiceTemplate().marshalSendAndReceive(urlRegistrarBoleto, requisicao, message -> {
+        return (RespostaEntity) getWebServiceTemplate().marshalSendAndReceive(urlRegistrarBoleto, requisicaoEntity, message -> {
             try {
                 if (message instanceof SaajSoapMessage) {
                     SaajSoapMessage soapMessage = (SaajSoapMessage) message;
@@ -95,8 +67,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
         });
     }
 
-    private String getToken(String clientID, String clientSecret) throws KeyManagementException, NoSuchAlgorithmException {
-        SSLUtil.turnOffSslChecking();
+    private String getToken(String clientID, String clientSecret) {
         String auth = clientID + ":" + clientSecret;
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
         String authHeaderValue = "Basic " + new String(encodedAuth);
@@ -123,40 +94,28 @@ public class BankSlipService extends WebServiceGatewaySupport {
         return Objects.requireNonNull(resp).substring(17, resp.indexOf("\",\"token_type"));
     }
 
-    @Bean
-    public HttpComponentsMessageSender httpComponentsMessageSender() throws Exception {
-        HttpComponentsMessageSender httpComponentsMessageSender = new HttpComponentsMessageSender();
-        httpComponentsMessageSender.setHttpClient(httpClient());
-
-        return httpComponentsMessageSender;
-    }
-
-    public HttpClient httpClient() throws Exception {
-        return HttpClientBuilder.create().setSSLSocketFactory(sslConnectionSocketFactory())
-                .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor()).build();
-    }
-
-    public SSLConnectionSocketFactory sslConnectionSocketFactory() throws Exception {
-        // NoopHostnameVerifier essentially turns hostname verification off as otherwise following error
-        // is thrown: java.security.cert.CertificateException: No name matching localhost found
-        return new SSLConnectionSocketFactory(sslContext(), NoopHostnameVerifier.INSTANCE);
-    }
-
-    public SSLContext sslContext() throws Exception {
-        return SSLContextBuilder.create()
-                .loadTrustMaterial(ResourceUtils.getFile(
-                        "file:ca/jssecacerts"), "changeit".toCharArray()).build();
-    }
-
-    private static String fillText(String value) {
-        String zeroes = "0000000000";
-
-        if(value.length() >= 10){
-            return value.substring(0, 10);
-        }
-
-        return zeroes.substring(0, (10 - value.length())) + value;
-    }
+//    @Bean
+//    public HttpComponentsMessageSender httpComponentsMessageSender() throws Exception {
+//        HttpComponentsMessageSender httpComponentsMessageSender = new HttpComponentsMessageSender();
+//        httpComponentsMessageSender.setHttpClient(httpClient());
+//
+//        return httpComponentsMessageSender;
+//    }
+//
+//    public HttpClient httpClient() throws Exception {
+//        return HttpClientBuilder.create().setSSLSocketFactory(sslConnectionSocketFactory())
+//                .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor()).build();
+//    }
+//
+//    public SSLConnectionSocketFactory sslConnectionSocketFactory() throws Exception {
+//        return new SSLConnectionSocketFactory(sslContext(), NoopHostnameVerifier.INSTANCE);
+//    }
+//
+//    public SSLContext sslContext() throws Exception {
+//        return SSLContextBuilder.create()
+//                .loadTrustMaterial(ResourceUtils.getFile(
+//                        "file:ca/jssecacerts"), "changeit".toCharArray()).build();
+//    }
 }
 
 

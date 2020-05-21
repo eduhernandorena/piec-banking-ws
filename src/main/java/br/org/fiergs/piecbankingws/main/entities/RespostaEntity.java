@@ -214,7 +214,7 @@ import javax.xml.bind.annotation.XmlType;
     "numeroContratoCobranca"
 })
 @XmlRootElement(name = "resposta")
-public class Resposta {
+public class RespostaEntity {
 
     protected String siglaSistemaMensagem;
     protected Short codigoRetornoPrograma;

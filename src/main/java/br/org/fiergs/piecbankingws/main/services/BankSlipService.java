@@ -71,7 +71,7 @@ public class BankSlipService extends WebServiceGatewaySupport {
     }
 
     private String getToken(String clientID, String clientSecret) throws KeyManagementException, NoSuchAlgorithmException {
-//        SSLUtil.turnOffSslChecking();
+        SSLUtil.turnOffSslChecking();
         String auth = clientID + ":" + clientSecret;
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
         String authHeaderValue = "Basic " + new String(encodedAuth);

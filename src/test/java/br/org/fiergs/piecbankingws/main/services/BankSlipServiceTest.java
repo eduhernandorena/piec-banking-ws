@@ -30,7 +30,7 @@ class BankSlipServiceTest {
         requisicaoEntity.setCodigoAceiteTitulo("N");
         requisicaoEntity.setCodigoTipoTitulo((short) 2);
         requisicaoEntity.setIndicadorPermissaoRecebimentoParcial("N");
-        requisicaoEntity.setTextoNumeroTituloCliente("00032487780000000001");
+        requisicaoEntity.setTextoNumeroTituloCliente("00032487780000009003");
         requisicaoEntity.setCodigoTipoInscricaoPagador((short) 2);
         requisicaoEntity.setNumeroInscricaoPagador(73400584000166L);
         requisicaoEntity.setNomePagador("MERCADO ANDREAZA DE MACEDO");
@@ -42,8 +42,10 @@ class BankSlipServiceTest {
         requisicaoEntity.setTextoNumeroTelefonePagador("45619988");
         requisicaoEntity.setCodigoChaveUsuario("J1234567");
         requisicaoEntity.setCodigoTipoCanalSolicitacao((short) 5);
+        System.out.println(requisicaoEntity);
 
         RespostaEntity resp = new BankSlipService(0).registerBillet(clientID, clientSecret, requisicaoEntity);
+        System.out.println(resp.toString());
 
         assertNotNull(resp);
     }

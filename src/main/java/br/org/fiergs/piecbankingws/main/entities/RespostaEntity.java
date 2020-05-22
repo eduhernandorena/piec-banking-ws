@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 
 /**
@@ -819,5 +820,40 @@ public class RespostaEntity {
                 ", indicadorComprovacaoBeneficiario='" + indicadorComprovacaoBeneficiario + '\'' +
                 ", numeroContratoCobranca=" + numeroContratoCobranca +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RespostaEntity that = (RespostaEntity) o;
+        return Objects.equals(getSiglaSistemaMensagem(), that.getSiglaSistemaMensagem()) &&
+                Objects.equals(getCodigoRetornoPrograma(), that.getCodigoRetornoPrograma()) &&
+                Objects.equals(getNomeProgramaErro(), that.getNomeProgramaErro()) &&
+                Objects.equals(getTextoMensagemErro(), that.getTextoMensagemErro()) &&
+                Objects.equals(getNumeroPosicaoErroPrograma(), that.getNumeroPosicaoErroPrograma()) &&
+                Objects.equals(getCodigoTipoRetornoPrograma(), that.getCodigoTipoRetornoPrograma()) &&
+                Objects.equals(getTextoNumeroTituloCobrancaBb(), that.getTextoNumeroTituloCobrancaBb()) &&
+                Objects.equals(getNumeroCarteiraCobranca(), that.getNumeroCarteiraCobranca()) &&
+                Objects.equals(getNumeroVariacaoCarteiraCobranca(), that.getNumeroVariacaoCarteiraCobranca()) &&
+                Objects.equals(getCodigoPrefixoDependenciaBeneficiario(), that.getCodigoPrefixoDependenciaBeneficiario()) &&
+                Objects.equals(getNumeroContaCorrenteBeneficiario(), that.getNumeroContaCorrenteBeneficiario()) &&
+                Objects.equals(getCodigoCliente(), that.getCodigoCliente()) &&
+                Objects.equals(getLinhaDigitavel(), that.getLinhaDigitavel()) &&
+                Objects.equals(getCodigoBarraNumerico(), that.getCodigoBarraNumerico()) &&
+                Objects.equals(getCodigoTipoEnderecoBeneficiario(), that.getCodigoTipoEnderecoBeneficiario()) &&
+                Objects.equals(getNomeLogradouroBeneficiario(), that.getNomeLogradouroBeneficiario()) &&
+                Objects.equals(getNomeBairroBeneficiario(), that.getNomeBairroBeneficiario()) &&
+                Objects.equals(getNomeMunicipioBeneficiario(), that.getNomeMunicipioBeneficiario()) &&
+                Objects.equals(getCodigoMunicipioBeneficiario(), that.getCodigoMunicipioBeneficiario()) &&
+                Objects.equals(getSiglaUfBeneficiario(), that.getSiglaUfBeneficiario()) &&
+                Objects.equals(getCodigoCepBeneficiario(), that.getCodigoCepBeneficiario()) &&
+                Objects.equals(getIndicadorComprovacaoBeneficiario(), that.getIndicadorComprovacaoBeneficiario()) &&
+                Objects.equals(getNumeroContratoCobranca(), that.getNumeroContratoCobranca());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSiglaSistemaMensagem(), getCodigoRetornoPrograma(), getNomeProgramaErro(), getTextoMensagemErro(), getNumeroPosicaoErroPrograma(), getCodigoTipoRetornoPrograma(), getTextoNumeroTituloCobrancaBb(), getNumeroCarteiraCobranca(), getNumeroVariacaoCarteiraCobranca(), getCodigoPrefixoDependenciaBeneficiario(), getNumeroContaCorrenteBeneficiario(), getCodigoCliente(), getLinhaDigitavel(), getCodigoBarraNumerico(), getCodigoTipoEnderecoBeneficiario(), getNomeLogradouroBeneficiario(), getNomeBairroBeneficiario(), getNomeMunicipioBeneficiario(), getCodigoMunicipioBeneficiario(), getSiglaUfBeneficiario(), getCodigoCepBeneficiario(), getIndicadorComprovacaoBeneficiario(), getNumeroContratoCobranca());
     }
 }

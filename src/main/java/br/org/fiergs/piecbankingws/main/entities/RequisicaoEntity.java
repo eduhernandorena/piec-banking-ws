@@ -9,6 +9,7 @@
 package br.org.fiergs.piecbankingws.main.entities;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -1532,5 +1533,60 @@ public class RequisicaoEntity {
                 ", codigoChaveUsuario='" + codigoChaveUsuario + '\'' +
                 ", codigoTipoCanalSolicitacao=" + codigoTipoCanalSolicitacao +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RequisicaoEntity that = (RequisicaoEntity) o;
+        return Objects.equals(getNumeroConvenio(), that.getNumeroConvenio()) &&
+                Objects.equals(getNumeroCarteira(), that.getNumeroCarteira()) &&
+                Objects.equals(getNumeroVariacaoCarteira(), that.getNumeroVariacaoCarteira()) &&
+                Objects.equals(getCodigoModalidadeTitulo(), that.getCodigoModalidadeTitulo()) &&
+                Objects.equals(getDataEmissaoTitulo(), that.getDataEmissaoTitulo()) &&
+                Objects.equals(getDataVencimentoTitulo(), that.getDataVencimentoTitulo()) &&
+                Objects.equals(getValorOriginalTitulo(), that.getValorOriginalTitulo()) &&
+                Objects.equals(getCodigoTipoDesconto(), that.getCodigoTipoDesconto()) &&
+                Objects.equals(getDataDescontoTitulo(), that.getDataDescontoTitulo()) &&
+                Objects.equals(getPercentualDescontoTitulo(), that.getPercentualDescontoTitulo()) &&
+                Objects.equals(getValorDescontoTitulo(), that.getValorDescontoTitulo()) &&
+                Objects.equals(getValorAbatimentoTitulo(), that.getValorAbatimentoTitulo()) &&
+                Objects.equals(getQuantidadeDiaProtesto(), that.getQuantidadeDiaProtesto()) &&
+                Objects.equals(getCodigoTipoJuroMora(), that.getCodigoTipoJuroMora()) &&
+                Objects.equals(getPercentualJuroMoraTitulo(), that.getPercentualJuroMoraTitulo()) &&
+                Objects.equals(getValorJuroMoraTitulo(), that.getValorJuroMoraTitulo()) &&
+                Objects.equals(getCodigoTipoMulta(), that.getCodigoTipoMulta()) &&
+                Objects.equals(getDataMultaTitulo(), that.getDataMultaTitulo()) &&
+                Objects.equals(getPercentualMultaTitulo(), that.getPercentualMultaTitulo()) &&
+                Objects.equals(getValorMultaTitulo(), that.getValorMultaTitulo()) &&
+                Objects.equals(getCodigoAceiteTitulo(), that.getCodigoAceiteTitulo()) &&
+                Objects.equals(getCodigoTipoTitulo(), that.getCodigoTipoTitulo()) &&
+                Objects.equals(getTextoDescricaoTipoTitulo(), that.getTextoDescricaoTipoTitulo()) &&
+                Objects.equals(getIndicadorPermissaoRecebimentoParcial(), that.getIndicadorPermissaoRecebimentoParcial()) &&
+                Objects.equals(getTextoNumeroTituloBeneficiario(), that.getTextoNumeroTituloBeneficiario()) &&
+                Objects.equals(getTextoCampoUtilizacaoBeneficiario(), that.getTextoCampoUtilizacaoBeneficiario()) &&
+                Objects.equals(getCodigoTipoContaCaucao(), that.getCodigoTipoContaCaucao()) &&
+                Objects.equals(getTextoNumeroTituloCliente(), that.getTextoNumeroTituloCliente()) &&
+                Objects.equals(getTextoMensagemBloquetoOcorrencia(), that.getTextoMensagemBloquetoOcorrencia()) &&
+                Objects.equals(getCodigoTipoInscricaoPagador(), that.getCodigoTipoInscricaoPagador()) &&
+                Objects.equals(getNumeroInscricaoPagador(), that.getNumeroInscricaoPagador()) &&
+                Objects.equals(getNomePagador(), that.getNomePagador()) &&
+                Objects.equals(getTextoEnderecoPagador(), that.getTextoEnderecoPagador()) &&
+                Objects.equals(getNumeroCepPagador(), that.getNumeroCepPagador()) &&
+                Objects.equals(getNomeMunicipioPagador(), that.getNomeMunicipioPagador()) &&
+                Objects.equals(getNomeBairroPagador(), that.getNomeBairroPagador()) &&
+                Objects.equals(getSiglaUfPagador(), that.getSiglaUfPagador()) &&
+                Objects.equals(getTextoNumeroTelefonePagador(), that.getTextoNumeroTelefonePagador()) &&
+                Objects.equals(getCodigoTipoInscricaoAvalista(), that.getCodigoTipoInscricaoAvalista()) &&
+                Objects.equals(getNumeroInscricaoAvalista(), that.getNumeroInscricaoAvalista()) &&
+                Objects.equals(getNomeAvalistaTitulo(), that.getNomeAvalistaTitulo()) &&
+                Objects.equals(getCodigoChaveUsuario(), that.getCodigoChaveUsuario()) &&
+                Objects.equals(getCodigoTipoCanalSolicitacao(), that.getCodigoTipoCanalSolicitacao());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumeroConvenio(), getNumeroCarteira(), getNumeroVariacaoCarteira(), getCodigoModalidadeTitulo(), getDataEmissaoTitulo(), getDataVencimentoTitulo(), getValorOriginalTitulo(), getCodigoTipoDesconto(), getDataDescontoTitulo(), getPercentualDescontoTitulo(), getValorDescontoTitulo(), getValorAbatimentoTitulo(), getQuantidadeDiaProtesto(), getCodigoTipoJuroMora(), getPercentualJuroMoraTitulo(), getValorJuroMoraTitulo(), getCodigoTipoMulta(), getDataMultaTitulo(), getPercentualMultaTitulo(), getValorMultaTitulo(), getCodigoAceiteTitulo(), getCodigoTipoTitulo(), getTextoDescricaoTipoTitulo(), getIndicadorPermissaoRecebimentoParcial(), getTextoNumeroTituloBeneficiario(), getTextoCampoUtilizacaoBeneficiario(), getCodigoTipoContaCaucao(), getTextoNumeroTituloCliente(), getTextoMensagemBloquetoOcorrencia(), getCodigoTipoInscricaoPagador(), getNumeroInscricaoPagador(), getNomePagador(), getTextoEnderecoPagador(), getNumeroCepPagador(), getNomeMunicipioPagador(), getNomeBairroPagador(), getSiglaUfPagador(), getTextoNumeroTelefonePagador(), getCodigoTipoInscricaoAvalista(), getNumeroInscricaoAvalista(), getNomeAvalistaTitulo(), getCodigoChaveUsuario(), getCodigoTipoCanalSolicitacao());
     }
 }
